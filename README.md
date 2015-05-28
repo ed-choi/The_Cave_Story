@@ -50,4 +50,4 @@ Detail of Games-
 
   Tim-
     Robot Platform-
-      Powers: movement, jump, ladder, grapple, pick up
+      Powers: movement, jump, ladder, grapple, pick up.
