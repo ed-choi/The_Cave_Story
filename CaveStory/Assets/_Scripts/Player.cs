@@ -21,12 +21,16 @@ public class Player : MonoBehaviour
     void Start()
     {
         controller = GetComponent<Controller2D>();
-
-        gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
-        jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
-        print("Gravity: " + gravity + "  Jump Velocity: " + jumpVelocity);
+		updateGrav ();
     }
-
+	private void updateGrav(){
+		gravity = -(2 * jumpHeight) / Mathf.Pow (timeToJumpApex, 2);
+		jumpVelocity = Mathf.Abs (gravity) * timeToJumpApex;
+	}
+	public void setJumpHeight(float jumpH){
+		jumpHeight = jumpH;
+		updateGrav ();
+	}
     // Edited original code added simple jump method for mario-like hopping.
     public void jump()
     {
