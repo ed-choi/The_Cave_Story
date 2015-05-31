@@ -10,13 +10,36 @@ public class Ed_Powers : MonoBehaviour {
 	void Start () {
 		player = GetComponent<Player>();
 	}
-	
+	void newPower(int powNum){
+		fire = false;
+		speed = false;
+		zip = false;
+		spring = false;
+		fight = false;
+		sword = false;
+		switch (powNum) {
+		case 0:
+			fire = true;
+		case 1:
+			speed = true;
+		case 2:
+			zip = true;
+		case 3:
+			spring = true;
+		case 4:
+			fight = true;
+		case 5:
+			sword = true;
+		}
+	}
 	// Update is called once per frame
 	void Update () {
 		playerPos = GameObject.Find ("Ed-Player-ARTNOTFINISHED").transform.position;
 		Debug.Log (playerPos);
-		if (spring) {
-			player.setJumpHeight (8);
+		if (fire) {
+		}
+		if (speed) {
+			
 		}
 		if (zip) {
 			if (Input.GetKey (KeyCode.Z)) {
@@ -34,8 +57,14 @@ public class Ed_Powers : MonoBehaviour {
 				}
 			}
 		}
-		if (speed) {
+		if (spring) {
+			player.setJumpHeight (8);
 		}
+		if (fight) {
+		}
+		if (sword) {
+		}
+
 
 	
 	}
