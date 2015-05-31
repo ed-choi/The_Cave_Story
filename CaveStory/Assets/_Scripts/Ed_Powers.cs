@@ -20,16 +20,22 @@ public class Ed_Powers : MonoBehaviour {
 		switch (powNum) {
 		case 0:
 			fire = true;
+			break;
 		case 1:
 			speed = true;
+			break;
 		case 2:
 			zip = true;
+			break;
 		case 3:
 			spring = true;
+			break;
 		case 4:
 			fight = true;
+			break;
 		case 5:
 			sword = true;
+			break;
 		}
 	}
 	// Update is called once per frame
