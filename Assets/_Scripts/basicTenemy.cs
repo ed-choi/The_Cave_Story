@@ -39,4 +39,12 @@ public class basicTenemy : MonoBehaviour
         rb2d.AddForce(Vector2.up * forces[Random.Range(0, 4)], ForceMode2D.Impulse);
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "basicBullet")
+        {
+            Destroy(gameObject);
+        }
+    }
+
 }

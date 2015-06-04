@@ -4,10 +4,12 @@ using System.Collections;
 public class Ed_Powers : MonoBehaviour
 {
 
+    public GameObject basicBulletPrefab;
     public bool fire, speed, zip, spring, fight, sword;
+    public bool showPositionInConsole = false; // Tick this to show position in console.
+
     private Player player;
     private Vector3 playerPos;
-    public bool showPositionInConsole = false; // Tick this to show position in console.
 
     // For restoring jump height when no spring is true.
     float originalJumpHeight;
@@ -59,7 +61,10 @@ public class Ed_Powers : MonoBehaviour
 
         if (fire)
         {
+            if(Input.GetKeyDown(KeyCode.X))
+                Instantiate(basicBulletPrefab, transform.position, transform.rotation);
         }
+
         if (speed)
         {
 
