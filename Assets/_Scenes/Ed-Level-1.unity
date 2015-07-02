@@ -516,6 +516,7 @@ MonoBehaviour:
   moveRand: 0
 --- !u!50 &396961404
 Rigidbody2D:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -524,11 +525,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 1
-  m_FixedAngle: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &396961405
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -576,6 +577,7 @@ MonoBehaviour:
   moveRand: 1
 --- !u!50 &407174098
 Rigidbody2D:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -584,11 +586,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 1
-  m_FixedAngle: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &407174099
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -855,7 +857,7 @@ RectTransform:
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 0, y: 200}
-  m_SizeDelta: {x: 100, y: 30}
+  m_SizeDelta: {x: 300, y: 30}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1032629143
 MonoBehaviour:
@@ -1193,7 +1195,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -35, y: 0}
+  m_AnchoredPosition: {x: -135.600006, y: 0}
   m_SizeDelta: {x: 20, y: 30}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1378186118
@@ -1330,6 +1332,7 @@ MonoBehaviour:
   moveRand: 1
 --- !u!50 &1491788809
 Rigidbody2D:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -1338,11 +1341,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 1
-  m_FixedAngle: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &1491788810
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1440,7 +1443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .387539357, g: .13965185, b: .904411793, a: 1}
+  m_Color: {r: .367647052, g: .581338823, b: 1, a: 1}
   m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -1521,7 +1524,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: .691176474, g: .137218863, b: .286214471, a: .0196078438}
+  m_BackGroundColor: {r: .441176474, g: .230320066, b: .2870332, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -1544,6 +1547,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!4 &1814979901
 Transform:
   m_ObjectHideFlags: 0
@@ -1687,7 +1691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basicBulletPrefab: {fileID: 143676, guid: e70e9c261f0d8fb448ff9ae8fd0fbd20, type: 2}
   fire: 1
-  speed: 0
+  speed: 1
   zip: 0
   spring: 0
   fight: 0
