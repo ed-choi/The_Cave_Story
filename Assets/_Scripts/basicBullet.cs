@@ -4,6 +4,7 @@ using System.Collections;
 public class basicBullet : MonoBehaviour {
 
     public float bulletSpeed;
+    public bool right;
     private Rigidbody2D rb;
 
     // Use this for initialization
@@ -15,7 +16,11 @@ public class basicBullet : MonoBehaviour {
 
     void Update() {
         //rb.AddRelativeForce(transform.right * bulletSpeed, ForceMode2D.Force);
-        transform.Translate(transform.right * bulletSpeed);
+        var dir = transform.right;
+        if (!right) {
+            dir *= -1;
+        }
+        transform.Translate(dir * bulletSpeed);
     }
 
 }

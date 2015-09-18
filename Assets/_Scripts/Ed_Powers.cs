@@ -55,8 +55,10 @@ public class Ed_Powers : MonoBehaviour {
             Debug.Log(playerPos);
 
         if (fire) {
-            if (Input.GetKeyDown(KeyCode.X))
-                Instantiate(basicBulletPrefab, transform.position, transform.rotation);
+            if (Input.GetKeyDown(KeyCode.X)) {
+                var clone = Instantiate(basicBulletPrefab, transform.position, transform.rotation) as GameObject;
+                clone.GetComponent<basicBullet>().right = player.Right;
+            }
         }
 
         if (speed) {

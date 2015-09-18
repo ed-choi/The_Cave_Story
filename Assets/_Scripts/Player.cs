@@ -11,6 +11,11 @@ public class Player : MonoBehaviour {
     float moveSpeed = 6;
 
     bool right = true;
+    public bool Right {
+        get {
+            return right;
+        }
+    }
 
     float gravity;
     float jumpVelocity;

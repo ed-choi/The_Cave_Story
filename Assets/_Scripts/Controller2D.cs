@@ -11,7 +11,6 @@ public class Controller2D : RaycastController {
 
     public override void Start() {
         base.Start();
-
     }
 
     public void Move(Vector3 velocity, bool standingOnPlatform = false) {
