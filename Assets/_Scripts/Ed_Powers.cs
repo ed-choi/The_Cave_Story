@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Ed_Powers : MonoBehaviour
-{
+public class Ed_Powers : MonoBehaviour {
 
     public GameObject basicBulletPrefab;
     public bool fire, speed, zip, spring, fight, sword;
@@ -15,22 +14,19 @@ public class Ed_Powers : MonoBehaviour
     float originalJumpHeight;
 
     // Use this for initialization
-    void Start()
-    {
+    void Start() {
         player = GetComponent<Player>();
         originalJumpHeight = player.jumpHeight;
     }
 
-    void newPower(int powNum)
-    {
+    void newPower(int powNum) {
         fire = false;
         speed = false;
         zip = false;
         spring = false;
         fight = false;
         sword = false;
-        switch (powNum)
-        {
+        switch (powNum) {
             case 0:
                 fire = true;
                 break;
@@ -52,59 +48,46 @@ public class Ed_Powers : MonoBehaviour
         }
     }
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         playerPos = GameObject.Find("Ed-Player").transform.position;
 
         if (showPositionInConsole)
             Debug.Log(playerPos);
 
-        if (fire)
-        {
-            if(Input.GetKeyDown(KeyCode.X))
+        if (fire) {
+            if (Input.GetKeyDown(KeyCode.X))
                 Instantiate(basicBulletPrefab, transform.position, transform.rotation);
         }
 
-        if (speed)
-        {
+        if (speed) {
 
         }
-        if (zip)
-        {
-            if (Input.GetKey(KeyCode.Z))
-            {
-                if (Input.GetKeyDown(KeyCode.UpArrow))
-                {
+        if (zip) {
+            if (Input.GetKey(KeyCode.Z)) {
+                if (Input.GetKeyDown(KeyCode.UpArrow)) {
                     Vector3 temp = new Vector3(0, 5, 0);
                     GameObject.Find("Ed-Player").transform.position += temp;
                 }
-                if (Input.GetKeyDown(KeyCode.RightArrow))
-                {
+                if (Input.GetKeyDown(KeyCode.RightArrow)) {
                     Vector3 temp = new Vector3(5, 0, 0);
                     GameObject.Find("Ed-Player").transform.position += temp;
                 }
-                if (Input.GetKeyDown(KeyCode.LeftArrow))
-                {
+                if (Input.GetKeyDown(KeyCode.LeftArrow)) {
                     Vector3 temp = new Vector3(-5, 0, 0);
                     GameObject.Find("Ed-Player").transform.position += temp;
                 }
             }
         }
 
-        if (spring)
-        {
+        if (spring) {
             player.setJumpHeight(8);
-        }
-        else if (!spring)
-        {
+        } else if (!spring) {
             player.setJumpHeight(originalJumpHeight);
         }
 
-        if (fight)
-        {
+        if (fight) {
         }
-        if (sword)
-        {
+        if (sword) {
         }
 
 
