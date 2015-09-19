@@ -23,23 +23,29 @@ public class Player : MonoBehaviour {
     float velocityXSmoothing;
 
     Controller2D controller;
-	public Sprite leftsprite;
-	public Sprite rightsprite;
-	SpriteRenderer sr;
+    public Sprite leftsprite;
+    public Sprite rightsprite;
+    SpriteRenderer sr;
+
+    [HideInInspector]
+    public Vector2 input;
+
     void Start() {
-		sr = GetComponent<SpriteRenderer>();
+        sr = GetComponent<SpriteRenderer>();
         controller = GetComponent<Controller2D>();
         updateGrav();
     }
+
     private void updateGrav() {
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
     }
+
     public void setJumpHeight(float jumpH) {
         jumpHeight = jumpH;
         updateGrav();
     }
-    // Edited original code added simple jump method for mario-like hopping.
+
     public void jump() {
         velocity.y = jumpVelocity;
     }
@@ -50,7 +56,8 @@ public class Player : MonoBehaviour {
             velocity.y = 0;
         }
 
-        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        controller.playerInput = input;
 
         var changed = false;
         if (input.x == 1 && !right) {
@@ -61,15 +68,12 @@ public class Player : MonoBehaviour {
             right = false;
         }
         if (changed) {
-			if(right == false){
-				sr.sprite = leftsprite;
-			}
-			if(right == true){
-				sr.sprite = rightsprite;
-			}
-			//var theScale = transform.localScale;
-            //theScale.x *= -1;
-            //transform.localScale = theScale;
+            if (right == false) {
+                sr.sprite = leftsprite;
+            }
+            if (right == true) {
+                sr.sprite = rightsprite;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && controller.collisions.below) {
