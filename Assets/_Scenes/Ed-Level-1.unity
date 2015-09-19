@@ -1609,6 +1609,8 @@ GameObject:
   - 114: {fileID: 1912473841}
   - 114: {fileID: 1912473846}
   - 114: {fileID: 1912473847}
+  - 95: {fileID: 1912473848}
+  - 114: {fileID: 1912473849}
   m_Layer: 0
   m_Name: Ed-Player
   m_TagString: Untagged
@@ -1735,6 +1737,34 @@ MonoBehaviour:
   fight: 0
   sword: 0
   showPositionInConsole: 0
+--- !u!95 &1912473848
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1912473840}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 33ab107b5de3f6940b03215010e65c9d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &1912473849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1912473840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cce845dfc1a3c4841a21a5aa6a8d72a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2022841085
 GameObject:
   m_ObjectHideFlags: 0

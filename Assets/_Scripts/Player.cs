@@ -23,8 +23,6 @@ public class Player : MonoBehaviour {
     float velocityXSmoothing;
 
     Controller2D controller;
-    public Sprite leftsprite;
-    public Sprite rightsprite;
     SpriteRenderer sr;
 
     [HideInInspector]
@@ -59,21 +57,10 @@ public class Player : MonoBehaviour {
         input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         controller.playerInput = input;
 
-        var changed = false;
         if (input.x == 1 && !right) {
-            changed = true;
             right = true;
         } else if (input.x == -1 && right) {
-            changed = true;
             right = false;
-        }
-        if (changed) {
-            if (right == false) {
-                sr.sprite = leftsprite;
-            }
-            if (right == true) {
-                sr.sprite = rightsprite;
-            }
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && controller.collisions.below) {
