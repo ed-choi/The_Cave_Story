@@ -23,8 +23,11 @@ public class Player : MonoBehaviour {
     float velocityXSmoothing;
 
     Controller2D controller;
-
+	public Sprite leftsprite;
+	public Sprite rightsprite;
+	SpriteRenderer sr;
     void Start() {
+		sr = GetComponent<SpriteRenderer>();
         controller = GetComponent<Controller2D>();
         updateGrav();
     }
@@ -58,9 +61,15 @@ public class Player : MonoBehaviour {
             right = false;
         }
         if (changed) {
-            var theScale = transform.localScale;
-            theScale.x *= -1;
-            transform.localScale = theScale;
+			if(right == false){
+				sr.sprite = leftsprite;
+			}
+			if(right == true){
+				sr.sprite = rightsprite;
+			}
+			//var theScale = transform.localScale;
+            //theScale.x *= -1;
+            //transform.localScale = theScale;
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && controller.collisions.below) {
