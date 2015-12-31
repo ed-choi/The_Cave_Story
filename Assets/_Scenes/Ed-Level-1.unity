@@ -1501,9 +1501,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basicBulletPrefab: {fileID: 143676, guid: e70e9c261f0d8fb448ff9ae8fd0fbd20, type: 2}
-  fire: 1
-  speed: 1
-  zip: 1
+  fire: 0
+  speed: 0
+  zip: 0
   spring: 0
   fight: 0
   sword: 0

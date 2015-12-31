@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class PlayerStatusHandler : MonoBehaviour {
@@ -14,9 +15,8 @@ public class PlayerStatusHandler : MonoBehaviour {
     void Update() {
         // Death or restart whenever.
         if ((health.value <= 0) || (Input.GetKeyDown(KeyCode.R))) {
-            Application.LoadLevel(Application.loadedLevel);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-
     }
 
     void OnCollisionEnter2D(Collision2D coll) {
