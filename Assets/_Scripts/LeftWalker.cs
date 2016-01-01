@@ -5,6 +5,7 @@
 public class LeftWalker : MonoBehaviour {
 
     public Player player;
+    public float moveSpeed = 3;
     Controller2D controller;
 
     // Use this for initialization
@@ -14,7 +15,6 @@ public class LeftWalker : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        var vec = new Vector3(-Vector3.right.x, -Vector3.down.y * player.Gravity, 0);
-        controller.Move(vec * Time.deltaTime);
+        controller.Move(new Vector3(-moveSpeed, player.Gravity, 0) * Time.deltaTime);
     }
 }
