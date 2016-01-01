@@ -14,7 +14,8 @@ public class Player : MonoBehaviour {
     float moveSpeed = 6;
 
     //Ed Powers
-    PowerType powerType;
+    public PowerType powerType;
+    PowerType oldPowerType;
     Power power;
 
     public GameObject basicBulletPrefab;
@@ -33,8 +34,13 @@ public class Player : MonoBehaviour {
     }
 
     float gravity;
+    public float Gravity {
+        get {
+            return gravity;
+        }
+    }
     float jumpVelocity;
-    Vector3 velocity;
+    public Vector3 velocity;
     float velocityXSmoothing;
 
     Controller2D controller;
@@ -47,12 +53,13 @@ public class Player : MonoBehaviour {
         sr = GetComponent<SpriteRenderer>();
         controller = GetComponent<Controller2D>();
         originalJumpHeight = jumpHeight;
-        powerType = PowerType.Speed;
         updateGrav();
         SetPower(powerType);
     }
 
     void Update() {
+
+        Cheat();
 
         if (controller.collisions.above || controller.collisions.below) {
             velocity.y = 0;
@@ -84,7 +91,9 @@ public class Player : MonoBehaviour {
         power.Update();
     }
 
-    void SetPower(PowerType powerType) {
+    public void SetPower(PowerType powerType) {
+        oldPowerType = this.powerType;
+        this.powerType = powerType;
         switch (powerType) {
             case PowerType.Fire:
                 power = new FirePower(this);
@@ -126,5 +135,17 @@ public class Player : MonoBehaviour {
 
     public float DampenMovement(float velocity, float targetVelocity) {
         return Mathf.SmoothDamp(velocity, targetVelocity, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+    }
+
+    public void Cheat() {
+        if (Input.GetKeyDown(KeyCode.Alpha1)) {
+            SetPower(PowerType.Fire);
+        } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+            SetPower(PowerType.Speed);
+        } else if (Input.GetKeyDown(KeyCode.Alpha3)) {
+            SetPower(PowerType.Spring);
+        } else if (Input.GetKeyDown(KeyCode.Alpha4)) {
+            SetPower(PowerType.Zip);
+        }
     }
 }
