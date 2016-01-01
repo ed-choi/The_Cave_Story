@@ -34,8 +34,13 @@ public class Player : MonoBehaviour {
     }
 
     float gravity;
+    public float Gravity {
+        get {
+            return gravity;
+        }
+    }
     float jumpVelocity;
-    Vector3 velocity;
+    public Vector3 velocity;
     float velocityXSmoothing;
 
     Controller2D controller;
@@ -53,6 +58,8 @@ public class Player : MonoBehaviour {
     }
 
     void Update() {
+
+        Cheat();
 
         if (controller.collisions.above || controller.collisions.below) {
             velocity.y = 0;
@@ -128,5 +135,17 @@ public class Player : MonoBehaviour {
 
     public float DampenMovement(float velocity, float targetVelocity) {
         return Mathf.SmoothDamp(velocity, targetVelocity, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+    }
+
+    public void Cheat() {
+        if (Input.GetKeyDown(KeyCode.Alpha1)) {
+            SetPower(PowerType.Fire);
+        } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+            SetPower(PowerType.Speed);
+        } else if (Input.GetKeyDown(KeyCode.Alpha3)) {
+            SetPower(PowerType.Spring);
+        } else if (Input.GetKeyDown(KeyCode.Alpha4)) {
+            SetPower(PowerType.Zip);
+        }
     }
 }
