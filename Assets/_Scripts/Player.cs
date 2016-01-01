@@ -14,7 +14,8 @@ public class Player : MonoBehaviour {
     float moveSpeed = 6;
 
     //Ed Powers
-    PowerType powerType;
+    public PowerType powerType;
+    PowerType oldPowerType;
     Power power;
 
     public GameObject basicBulletPrefab;
@@ -47,7 +48,6 @@ public class Player : MonoBehaviour {
         sr = GetComponent<SpriteRenderer>();
         controller = GetComponent<Controller2D>();
         originalJumpHeight = jumpHeight;
-        powerType = PowerType.Speed;
         updateGrav();
         SetPower(powerType);
     }
@@ -84,7 +84,9 @@ public class Player : MonoBehaviour {
         power.Update();
     }
 
-    void SetPower(PowerType powerType) {
+    public void SetPower(PowerType powerType) {
+        oldPowerType = this.powerType;
+        this.powerType = powerType;
         switch (powerType) {
             case PowerType.Fire:
                 power = new FirePower(this);
