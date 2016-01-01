@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Player))]
 [RequireComponent(typeof(Controller2D))]
 public class LeftWalker : MonoBehaviour {
 
