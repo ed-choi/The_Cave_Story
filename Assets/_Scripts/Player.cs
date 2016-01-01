@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 [RequireComponent(typeof(Controller2D))]
 public class Player : MonoBehaviour {
+
+    public enum PowerType {
+        Fire, Speed, Zip, Spring
+    }
 
     public float jumpHeight = 4;
     public float timeToJumpApex = .4f;
@@ -11,15 +14,11 @@ public class Player : MonoBehaviour {
     float moveSpeed = 6;
 
     //Ed Powers
+    PowerType powerType;
+    Power power;
+
     public GameObject basicBulletPrefab;
-    public bool fire, speed, zip, spring, fight, sword;
     public bool showPositionInConsole = false; // Tick this to show position in console.
-
-    public float speedTime = 5;
-
-    float superSpeed = 12;
-    float speedTimer;
-    bool speedActivated = false;
 
     private Vector3 playerPos;
 
@@ -48,22 +47,9 @@ public class Player : MonoBehaviour {
         sr = GetComponent<SpriteRenderer>();
         controller = GetComponent<Controller2D>();
         originalJumpHeight = jumpHeight;
-        speedTimer = speedTime;
+        powerType = PowerType.Speed;
         updateGrav();
-    }
-
-    private void updateGrav() {
-        gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
-        jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
-    }
-
-    public void setJumpHeight(float jumpH) {
-        jumpHeight = jumpH;
-        updateGrav();
-    }
-
-    public void jump() {
-        velocity.y = jumpVelocity;
+        SetPower(powerType);
     }
 
     void Update() {
@@ -85,106 +71,60 @@ public class Player : MonoBehaviour {
             jump();
         }
 
-        if (Input.GetKeyDown(KeyCode.Z)) {
-            speedActivated = true;
-        }
-
-        float targetVelocityX;
-
-        if (speed && speedActivated && speedTimer > 0) {
-            speedTimer -= Time.deltaTime;
-            if (right) {
-                targetVelocityX = superSpeed;
-            } else {
-                targetVelocityX = -superSpeed;
-            }
-
-            Debug.Log(speedTimer);
+        if (power.WillChangeVelocity()) {
+            velocity.x = power.GetXVelocity(velocity.x);
+            velocity.y = power.GetYVelocity(velocity.y);
         } else {
-            Debug.Log("dank memes");
-            speedActivated = false;
-            speedTimer = speedTime;
-            targetVelocityX = input.x * moveSpeed;
+            velocity.x = GetXVelocity(velocity.x);
+            velocity.y = GetYVelocity(velocity.y);
         }
 
-        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
-
-        velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
-        Powers();
+        power.Update();
     }
 
-    void newPower(int powNum) {
-        fire = false;
-        speed = false;
-        zip = false;
-        spring = false;
-        fight = false;
-        sword = false;
-        switch (powNum) {
-            case 0:
-                fire = true;
+    void SetPower(PowerType powerType) {
+        switch (powerType) {
+            case PowerType.Fire:
+                power = new FirePower(this);
                 break;
-            case 1:
-                speed = true;
+            case PowerType.Speed:
+                power = new SpeedPower(this);
                 break;
-            case 2:
-                zip = true;
+            case PowerType.Spring:
+                power = new SpringPower(this);
                 break;
-            case 3:
-                spring = true;
-                break;
-            case 4:
-                fight = true;
-                break;
-            case 5:
-                sword = true;
+            case PowerType.Zip:
+                power = new ZipPower(this);
                 break;
         }
     }
 
-    void Powers() {
-        playerPos = transform.position;
+    private void updateGrav() {
+        gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
+        jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
+    }
 
-        if (showPositionInConsole)
-            Debug.Log(playerPos);
+    public void setJumpHeight(float jumpH) {
+        jumpHeight = jumpH;
+        updateGrav();
+    }
 
-        if (fire) {
-            if (Input.GetKeyDown(KeyCode.X)) {
-                var clone = Instantiate(basicBulletPrefab, transform.position, transform.rotation) as GameObject;
-                clone.GetComponent<basicBullet>().right = right;
-            }
-        }
+    public void jump() {
+        velocity.y = jumpVelocity;
+    }
 
-        if (zip) {
-            if (Input.GetKey(KeyCode.Z)) {
-                if (Input.GetKeyDown(KeyCode.UpArrow)) {
-                    Vector3 temp = new Vector3(0, 5, 0);
-                    transform.position += temp;
-                }
-                if (Input.GetKeyDown(KeyCode.RightArrow)) {
-                    Vector3 temp = new Vector3(5, 0, 0);
-                    transform.position += temp;
-                }
-                if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-                    Vector3 temp = new Vector3(-5, 0, 0);
-                    transform.position += temp;
-                }
-            }
-        }
+    public float GetXVelocity(float xvelocity) {
+        var targetVelocityX = input.x * moveSpeed;
+        return Mathf.SmoothDamp(xvelocity, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+    }
 
-        if (spring) {
-            setJumpHeight(8);
-        } else if (!spring) {
-            setJumpHeight(originalJumpHeight);
-        }
+    public float GetYVelocity(float yvelocity) {
+        return yvelocity + gravity * Time.deltaTime;
+    }
 
-        if (fight) {
-        }
-        if (sword) {
-        }
-
-
+    public float DampenMovement(float velocity, float targetVelocity) {
+        return Mathf.SmoothDamp(velocity, targetVelocity, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
     }
 }
