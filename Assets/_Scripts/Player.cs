@@ -15,16 +15,10 @@ public class Player : MonoBehaviour {
 
     //Ed Powers
     public PowerType powerType;
-    PowerType oldPowerType;
     Power power;
 
     public GameObject basicBulletPrefab;
     public bool showPositionInConsole = false; // Tick this to show position in console.
-
-    private Vector3 playerPos;
-
-    // For restoring jump height when no spring is true.
-    float originalJumpHeight;
 
     bool right = true;
     public bool Right {
@@ -44,15 +38,12 @@ public class Player : MonoBehaviour {
     float velocityXSmoothing;
 
     Controller2D controller;
-    SpriteRenderer sr;
 
     [HideInInspector]
     public Vector2 input;
 
     void Start() {
-        sr = GetComponent<SpriteRenderer>();
         controller = GetComponent<Controller2D>();
-        originalJumpHeight = jumpHeight;
         updateGrav();
         SetPower(powerType);
     }
@@ -92,7 +83,6 @@ public class Player : MonoBehaviour {
     }
 
     public void SetPower(PowerType powerType) {
-        oldPowerType = this.powerType;
         this.powerType = powerType;
         switch (powerType) {
             case PowerType.Fire:
